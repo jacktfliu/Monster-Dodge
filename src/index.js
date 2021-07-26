@@ -1,6 +1,7 @@
-import './stylesheets/main.scss'
 
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext("2d");
 
-// document.addEventListener('DOMContentLoaded', () => {
-
-// })
+    ctx.fillReact()
+})

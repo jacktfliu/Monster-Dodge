@@ -1,4 +1,3 @@
-// webpack.config.js
 
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,7 +9,7 @@ const config = {
   ],
   output: {
     path: path.join(__dirname, 'dist'), // bundled file in dist/
-    filename: 'bundle.js',
+    filename: 'main.js',
   },
   module: {
     rules: [
