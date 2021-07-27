@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fx: 0,
         fy: 0,
         speed: 9,
+        moving: false
     }
 
     const playerChar = document.getElementById('player')
@@ -26,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // background.src = backgroundPhoto
  
 
-    function drawPlayer(img, sX, sY, sW, sH, dX, dY, dW, dH){
-        ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
+    function drawPlayer(imgfile, sX, sY, sW, sH, dX, dY, dW, dH){
+        ctx.drawImage(imgfile, sX, sY, sW, sH, dX, dY, dW, dH);
     }
 
     function animate(){
@@ -40,22 +41,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     window.addEventListener('keydown', function(e){
-        keys[e.keycode] = true;
-        console.log(keys)
+        keys[e.keyCode] = true;
     })
     
     window.addEventListener('keyup', function(e){
-        delete keys[e.keycode];
+        delete keys[e.keyCode];
     })
-
+  
     function moveChar(){
         if (keys[38]){
             player.y -= player.speed
-        } else if (keys[37]){
+        } else if (keys[37] ){
             player.x -= player.speed
-        } else if (keys[40]){
+        } else if (keys[40] ){
             player.y += player.speed
-        } else if (keys[39]){
+        } else if (keys[39] ){
             player.x += player.speed
         }
     }
