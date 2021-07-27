@@ -13,18 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const player = {
         x: 200,
         y: 200,
-        width: 34,
-        height: 45,
+        width: 32,
+        height: 48,
         fx: 0,
-        fy: 0,
-        speed: 9,
+        fy: 2,
+        speed: 5,
         moving: false
     }
 
     const playerChar = document.getElementById('player')
-    // playerChar.src = charPhoto
-    // const background= new Image();
-    // background.src = backgroundPhoto
  
 
     function drawPlayer(imgfile, sX, sY, sW, sH, dX, dY, dW, dH){
@@ -51,12 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveChar(){
         if (keys[38]){
             player.y -= player.speed
+            player.fy = 3
         } else if (keys[37] ){
             player.x -= player.speed
+            player.fy = 1
         } else if (keys[40] ){
             player.y += player.speed
+            player.fy = 0
         } else if (keys[39] ){
             player.x += player.speed
+            player.fy = 2
         }
     }
 
