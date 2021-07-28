@@ -7,8 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.heigth = 600;
 
 
+
     const keys = [];
-    const targetActions = ['up', 'down', 'left', 'right']
+    const ifritMovements = ['up', 'top right', 'right', 'down right', 'down'];
+    const numOfIfrit = 10;
+    const ifritBot = [];
 
     const player = {
         x: 200,
@@ -56,15 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fy: 0,
         speed: 4,
     }
-    const ifrit = {
-        x: 100,
-        y: 100,
-        width: 80,
-        height: 80,
-        fx: 0,
-        fy: 0,
-        speed: 2,
-    }
+
 
     const playerChar = document.getElementById('player')
     const dragonTarget = document.getElementById('dragon')
@@ -112,6 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ifrit.x < canvas.width + ifrit.width) {
             ifrit.x += ifrit.speed
         } else {ifrit.x = 0 - ifrit.width}
+        for (i = 0; i < ifritBot.length; i++ ){
+            ifritBot[i].drawIfrit();
+            ifritBot[i].updateIfritMovement();
+        }
 
 
         //dragon sprite
@@ -123,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dragon.x < canvas.width + dragon.width) {
             dragon.x += dragon.speed
         } else {dragon.x = 0 - dragon.width}
-
 
         moveChar();
         handlePlayerF();
@@ -171,10 +169,79 @@ document.addEventListener('DOMContentLoaded', () => {
         animatePlayer();   
     }
 
-    class Character {
+
+
+
+
+    //ifrit movements
+    class Ifrit {
         constructor(){
-            
+            this.width = 80;
+            this.height = 80;
+            this.frameX = 3;
+            this.x = Math.random() * canvas.width - this.width;
+            this.y = Math.random() * canvas.height - this.height;
+            this.speed = (Math.random() * 2) + 3;
+            this.minFrame = 0;
+            this.action = ifritMovements[Math.floor(Math.random() * ifritMovements.length)];
+            if (this.action === 'up') {
+                this.frameY = 0; 
+                this.minFrame = 0;
+                this.maxFrame = 3;
+            }
+            else if (this.action === 'right') {
+                this.frameY = 0; 
+                this.minFrame = 0;
+                this.maxFrame = 3;
+            }
+            else if (this.action === 'down') {
+                this.minFrame = 0;
+                this.frameY = 0;
+                this.maxFrame = 3;
+            }
+
         }
+
+        drawIfrit(){
+            drawPlayer(ifritTarget, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
+            
+            if (this.frameX < this.maxFrame) this.frameX++;
+            else this.frameX = this.minFrame;
+        }
+
+        updateIfritMovement(){
+            if (this.action === 'up') {
+                if (this.y < 0 - (this.height * 5)) {
+                    this.y = canvas.height + this.height;
+                    this.x = Math.random() * canvas.width;
+                    this.speed = (Math.random() * 2) + 3;
+                } else {
+                    this.y -= this.speed;  
+                }
+            }
+            else if (this.action === 'right') {
+                if (this.x > canvas.width + (this.width * 5)) {
+                    this.x = 0 - this.width;
+                    this.y = Math.random() * canvas.height; 
+                    this.speed = (Math.random() * 2) + 3;
+                } else {
+                    this.x += this.speed; 
+                }
+            }
+            else if (this.action === 'down') {
+                if (this.y > canvas.height + (this.height * 5)) {
+                    this.y = 0 - this.height;
+                    this.x = Math.random() * canvas.width;
+                    this.speed = (Math.random() * 2) + 3;
+                } else {
+                    this.y += this.speed;  
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < numOfIfrit; i++){
+        ifritBot.push(new Ifrit());
     }
 
     update();
