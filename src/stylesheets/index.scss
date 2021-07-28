@@ -1,9 +1,12 @@
 #canvas {
-  background: #f0f0f0;
   border-radius: 5px;
   height: 90%;
   width: 90%;
   margin-bottom: 50px;
+  background: white;
+  background-image: url('../src/assets/background.gif');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .top-nav{
@@ -38,3 +41,26 @@
 #player {
   display: none;
 }
+
+#dragon {
+  display: none;
+}
+
+#leviathan {
+  display: none;
+}
+
+// #phoenix{
+//   display: none;
+// }
+
+#death-scythe{
+  display: none;
+}
+
+#ifrit{
+  display: none;
+}
+
+
+
