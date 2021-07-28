@@ -6,12 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = 1000;
     canvas.heigth = 600;
 
-
-
     const keys = [];
-    const ifritMovements = ['up', 'top right', 'right', 'down right', 'down'];
-    const numOfIfrit = 10;
+    const ifritMovements = ['up','right', 'left', 'down'];
+    const numOfIfrit = 5;
     const ifritBot = [];
+
+    const dragonMovement = ['up','right', 'left', 'down'];
+    const numOfDragon = 2;
+    const dragonBot = [];
+
+    const deathScytheMovement = ['up','right', 'left', 'down'];
+    const numOfDeathScythe = 5;
+    const DeathScytheBot = [];
 
     const player = {
         x: 200,
@@ -23,15 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         speed: 5,
         moving: false
     }
-    const dragon = {
-        x: 0,
-        y: 0,
-        width: 142,
-        height: 142,
-        fx: 0,
-        fy: 0,
-        speed: 4,
-    }
     const leviathan = {
         x: 300,
         y: 300,
@@ -41,30 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
         fy: 0,
         speed: 4,
     }
-    // const phoenix = {
-    //     x: 200,
-    //     y: 200,
-    //     width: 142,
-    //     height: 142,
-    //     fx: 0,
-    //     fy: 0,
-    //     speed: 4,
-    // }
-    const deathScythe = {
-        x: 200,
-        y: 200,
-        width: 50,
-        height: 48,
-        fx: 0,
-        fy: 0,
-        speed: 4,
-    }
 
 
     const playerChar = document.getElementById('player')
     const dragonTarget = document.getElementById('dragon')
-    const leviathanTarget = document.getElementById('leviathan')
-    // const phoenix = document.getElementById('phoenix')
     const deathScytheTarget = document.getElementById('death-scythe')
     const ifritTarget = document.getElementById('ifrit')    
 
@@ -78,50 +55,20 @@ document.addEventListener('DOMContentLoaded', () => {
         drawPlayer(playerChar, player.width * player.fx, player.height * player.fy, player.width, player.height, 
         player.x, player.y, player.width, player.height);
 
-        //leviathan sprite
-        ctx.drawImage(leviathanTarget, leviathan.width * leviathan.fx, leviathan.height * leviathan.fy, leviathan.width, leviathan.height, 
-        leviathan.x, leviathan.y, leviathan.width, leviathan.height)
-        //leviathan movement
-        if (leviathan.fx < 3){leviathan.fx++} else {leviathan.fx = 1, leviathan.fy = 2}
-        // move leviathan 
-        if (leviathan.x < canvas.width + leviathan.width) {
-            leviathan.x += leviathan.speed
-        } else {leviathan.x = 0 - leviathan.width}
+        for (i = 0; i < DeathScytheBot.length; i++ ){
+            DeathScytheBot[i].drawDeath();
+            DeathScytheBot[i].updateDeathMovement();
+        }
 
-        //deathScythe sprite
-        ctx.drawImage(deathScytheTarget, deathScythe.width * deathScythe.fx, deathScythe.height * deathScythe.fy, deathScythe.width, deathScythe.height, 
-        deathScythe.x, deathScythe.y, deathScythe.width, deathScythe.height)
-        //deathScythe movement
-        if (deathScythe.fx < 3){deathScythe.fx++} else {deathScythe.fx = 0, deathScythe.fy = 2}
-        // move deathScythe 
-        if (deathScythe.x < canvas.width + deathScythe.width) {
-            deathScythe.x += deathScythe.speed
-        } else {deathScythe.x = 0 - deathScythe.width}
-    
-        //ifrit sprite
-        ctx.drawImage(ifritTarget, ifrit.width * ifrit.fx, ifrit.height * ifrit.fy, ifrit.width, ifrit.height, 
-        ifrit.x, ifrit.y, ifrit.width, ifrit.height)
-        //ifrit movement
-        if (ifrit.fx < 3){ifrit.fx++} else {ifrit.fx = 0, ifrit.fy = 2}
-        // move ifrit 
-        if (ifrit.x < canvas.width + ifrit.width) {
-            ifrit.x += ifrit.speed
-        } else {ifrit.x = 0 - ifrit.width}
         for (i = 0; i < ifritBot.length; i++ ){
             ifritBot[i].drawIfrit();
             ifritBot[i].updateIfritMovement();
         }
 
-
-        //dragon sprite
-        ctx.drawImage(dragonTarget, dragon.width * dragon.fx, dragon.height * dragon.fy, dragon.width, dragon.height, 
-        dragon.x, dragon.y, dragon.width, dragon.height)
-        //dragon movement
-        if (dragon.fx < 3){dragon.fx++} else {dragon.fx = 0, dragon.fy = 2}
-        // move draogn 
-        if (dragon.x < canvas.width + dragon.width) {
-            dragon.x += dragon.speed
-        } else {dragon.x = 0 - dragon.width}
+        for (i = 0; i < dragonBot.length; i++ ){
+            dragonBot[i].drawDragon();
+            dragonBot[i].updateDragonMovement();
+        }
 
         moveChar();
         handlePlayerF();
@@ -170,43 +117,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
-
-
     //ifrit movements
     class Ifrit {
         constructor(){
             this.width = 80;
             this.height = 80;
-            this.frameX = 3;
+            this.fx = 0;
             this.x = Math.random() * canvas.width - this.width;
             this.y = Math.random() * canvas.height - this.height;
-            this.speed = (Math.random() * 2) + 3;
+            this.speed = (Math.random() * 3) + 2;
             this.minFrame = 0;
             this.action = ifritMovements[Math.floor(Math.random() * ifritMovements.length)];
             if (this.action === 'up') {
-                this.frameY = 0; 
+                this.fy = 3; 
                 this.minFrame = 0;
                 this.maxFrame = 3;
             }
             else if (this.action === 'right') {
-                this.frameY = 0; 
+                this.fy = 2; 
                 this.minFrame = 0;
                 this.maxFrame = 3;
             }
             else if (this.action === 'down') {
+                this.fy = 0;
                 this.minFrame = 0;
-                this.frameY = 0;
                 this.maxFrame = 3;
+            }
+            else if (this.action === 'left') {
+                this.fy = 1;
+                this.minFrame = 0;
+                this.maxFrame = 3
             }
 
         }
 
         drawIfrit(){
-            drawPlayer(ifritTarget, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
+            drawPlayer(ifritTarget, this.width * this.fx, this.height * this.fy, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
             
-            if (this.frameX < this.maxFrame) this.frameX++;
-            else this.frameX = this.minFrame;
+            if (this.fx < this.maxFrame){
+                this.fx++
+            } else {
+                this.fx = this.minFrame
+            }
         }
 
         updateIfritMovement(){
@@ -214,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (this.y < 0 - (this.height * 5)) {
                     this.y = canvas.height + this.height;
                     this.x = Math.random() * canvas.width;
-                    this.speed = (Math.random() * 2) + 3;
+                    this.speed = (Math.random() * 3) + 2;
                 } else {
                     this.y -= this.speed;  
                 }
@@ -223,16 +175,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (this.x > canvas.width + (this.width * 5)) {
                     this.x = 0 - this.width;
                     this.y = Math.random() * canvas.height; 
-                    this.speed = (Math.random() * 2) + 3;
+                    this.speed = (Math.random() * 3) + 2;
                 } else {
                     this.x += this.speed; 
                 }
-            }
+            } 
+            else if (this.action ==='left'){
+                if (this.x > canvas.width + (this.width * 5)) {
+                    this.x = 0 + this.width;
+                    this.y = Math.random() * canvas.height; 
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.x -= this.speed
+                }
+            } 
             else if (this.action === 'down') {
                 if (this.y > canvas.height + (this.height * 5)) {
                     this.y = 0 - this.height;
                     this.x = Math.random() * canvas.width;
-                    this.speed = (Math.random() * 2) + 3;
+                    this.speed = (Math.random() * 3) + 2;
                 } else {
                     this.y += this.speed;  
                 }
@@ -242,6 +203,187 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (i = 0; i < numOfIfrit; i++){
         ifritBot.push(new Ifrit());
+    }
+
+    // dragon 
+
+    class Dragon {
+        constructor(){
+            this.width = 142;
+            this.height = 142;
+            this.fx = 0;
+            this.x = Math.random() * canvas.width - this.width;
+            this.y = Math.random() * canvas.height - this.height;
+            this.speed = (Math.random() * 3) + 2;
+            this.minFrame = 0;
+            this.action = dragonMovement[Math.floor(Math.random() * dragonMovement.length)];
+            if (this.action === 'up') {
+                this.fy = 3; 
+                this.minFrame = 0;
+                this.maxFrame = 3;
+            }
+            else if (this.action === 'right') {
+                this.fy = 2; 
+                this.minFrame = 0;
+                this.maxFrame = 3;
+            }
+            else if (this.action === 'down') {
+                this.fy = 0;
+                this.minFrame = 0;
+                this.maxFrame = 3;
+            }
+            else if (this.action === 'left') {
+                this.fy = 1;
+                this.minFrame = 0;
+                this.maxFrame = 3
+            }
+
+        }
+
+        drawDragon(){
+            drawPlayer(dragonTarget, this.width * this.fx, this.height * this.fy, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
+            
+            if (this.fx < this.maxFrame){
+                this.fx++
+            } else {
+                this.fx = this.minFrame
+            }
+        }
+
+        updateDragonMovement(){
+            if (this.action === 'up') {
+                if (this.y < 0 - (this.height * 5)) {
+                    this.y = canvas.height + this.height;
+                    this.x = Math.random() * canvas.width;
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.y -= this.speed;  
+                }
+            }
+            else if (this.action === 'right') {
+                if (this.x > canvas.width + (this.width * 5)) {
+                    this.x = 0 - this.width;
+                    this.y = Math.random() * canvas.height; 
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.x += this.speed; 
+                }
+            } 
+            else if (this.action ==='left'){
+                if (this.x > canvas.width + (this.width * 5)) {
+                    this.x = 0 + this.width;
+                    this.y = Math.random() * canvas.height; 
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.x -= this.speed
+                }
+            } 
+            else if (this.action === 'down') {
+                if (this.y > canvas.height + (this.height * 5)) {
+                    this.y = 0 - this.height;
+                    this.x = Math.random() * canvas.width;
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.y += this.speed;  
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < numOfDragon; i++){
+        dragonBot.push(new Dragon());
+    }
+
+
+
+
+    // DeathScythe
+
+    class DeathScythe {
+        constructor(){
+            this.width = 50;
+            this.height = 48;
+            this.fx = 0;
+            this.x = Math.random() * canvas.width - this.width;
+            this.y = Math.random() * canvas.height - this.height;
+            this.speed = (Math.random() * 3) + 2;
+            this.minFrame = 0;
+            this.action = deathScytheMovement[Math.floor(Math.random() * deathScytheMovement.length)];
+            if (this.action === 'up') {
+                this.fy = 3; 
+                this.minFrame = 0;
+                this.maxFrame = 3;
+            }
+            else if (this.action === 'right') {
+                this.fy = 2; 
+                this.minFrame = 0;
+                this.maxFrame = 3;
+            }
+            else if (this.action === 'down') {
+                this.fy = 0;
+                this.minFrame = 0;
+                this.maxFrame = 3;
+            }
+            else if (this.action === 'left') {
+                this.fy = 1;
+                this.minFrame = 0;
+                this.maxFrame = 3
+            }
+
+        }
+
+        drawDeath(){
+            drawPlayer(deathScytheTarget, this.width * this.fx, this.height * this.fy, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
+            
+            if (this.fx < this.maxFrame){
+                this.fx++
+            } else {
+                this.fx = this.minFrame
+            }
+        }
+
+        updateDeathMovement(){
+            if (this.action === 'up') {
+                if (this.y < 0 - (this.height * 5)) {
+                    this.y = canvas.height + this.height;
+                    this.x = Math.random() * canvas.width;
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.y -= this.speed;  
+                }
+            }
+            else if (this.action === 'right') {
+                if (this.x > canvas.width + (this.width * 5)) {
+                    this.x = 0 - this.width;
+                    this.y = Math.random() * canvas.height; 
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.x += this.speed; 
+                }
+            } 
+            else if (this.action ==='left'){
+                if (this.x > canvas.width + (this.width * 5)) {
+                    this.x = 0 + this.width;
+                    this.y = Math.random() * canvas.height; 
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.x -= this.speed
+                }
+            } 
+            else if (this.action === 'down') {
+                if (this.y > canvas.height + (this.height * 5)) {
+                    this.y = 0 - this.height;
+                    this.x = Math.random() * canvas.width;
+                    this.speed = (Math.random() * 3) + 2;
+                } else {
+                    this.y += this.speed;  
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < numOfDeathScythe; i++){
+        DeathScytheBot.push(new DeathScythe());
     }
 
     update();
