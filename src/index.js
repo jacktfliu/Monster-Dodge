@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const keys = [];
     const ifritMovements = ['up','right', 'left', 'down'];
-    const numOfIfrit = 5;
+    const numOfIfrit = 7;
     const ifritBot = [];
 
     const dragonMovement = ['up','right', 'left', 'down'];
@@ -29,24 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
         speed: 5,
         moving: false
     }
-    const leviathan = {
-        x: 300,
-        y: 300,
-        width: 177.5,
-        height: 177.5,
-        fx: 0,
-        fy: 0,
-        speed: 4,
-    }
-
 
     const playerChar = document.getElementById('player')
     const dragonTarget = document.getElementById('dragon')
     const deathScytheTarget = document.getElementById('death-scythe')
     const ifritTarget = document.getElementById('ifrit')    
 
-    function drawPlayer(imgfile, sX, sY, sW, sH, dX, dY, dW, dH){
-        ctx.drawImage(imgfile, sX, sY, sW, sH, dX, dY, dW, dH);
+    function drawPlayer(img, sX, sY, sW, sH, dX, dY, dW, dH){
+        ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
     }
 
     function animatePlayer(){
@@ -126,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x = Math.random() * canvas.width - this.width;
             this.y = Math.random() * canvas.height - this.height;
             this.speed = (Math.random() * 3) + 2;
-            this.minFrame = 0;
             this.action = ifritMovements[Math.floor(Math.random() * ifritMovements.length)];
             if (this.action === 'up') {
                 this.fy = 3; 
@@ -215,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x = Math.random() * canvas.width - this.width;
             this.y = Math.random() * canvas.height - this.height;
             this.speed = (Math.random() * 3) + 2;
-            this.minFrame = 0;
             this.action = dragonMovement[Math.floor(Math.random() * dragonMovement.length)];
             if (this.action === 'up') {
                 this.fy = 3; 
@@ -307,7 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x = Math.random() * canvas.width - this.width;
             this.y = Math.random() * canvas.height - this.height;
             this.speed = (Math.random() * 3) + 2;
-            this.minFrame = 0;
             this.action = deathScytheMovement[Math.floor(Math.random() * deathScytheMovement.length)];
             if (this.action === 'up') {
                 this.fy = 3; 
