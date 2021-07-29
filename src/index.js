@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const ifritBot = [];
 
     const dragonMovement = ['up','right', 'left', 'down'];
-    const numOfDragon = 2;
+    const numOfDragon = 3;
     const dragonBot = [];
 
     const deathScytheMovement = ['up','right', 'left', 'down'];
     const numOfDeathScythe = 5;
     const DeathScytheBot = [];
+
+    const score = 0;
 
     const player = {
         x: 200,
@@ -48,18 +50,23 @@ document.addEventListener('DOMContentLoaded', () => {
         for (i = 0; i < DeathScytheBot.length; i++ ){
             DeathScytheBot[i].drawDeath();
             DeathScytheBot[i].updateDeathMovement();
+            // collision();
         }
 
         for (i = 0; i < ifritBot.length; i++ ){
             ifritBot[i].drawIfrit();
             ifritBot[i].updateIfritMovement();
+            // collision();
         }
 
         for (i = 0; i < dragonBot.length; i++ ){
             dragonBot[i].drawDragon();
             dragonBot[i].updateDragonMovement();
+            // collision();
         }
 
+        drawScore();
+        collision();
         moveChar();
         handlePlayerF();
         requestAnimationFrame(animatePlayer);
@@ -101,11 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
             player.fx = 0
         }
     }
-
-    function update (){
-        animatePlayer();   
-    }
-
 
     //ifrit movements
     class Ifrit {
@@ -283,8 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
-
     // DeathScythe
 
     class DeathScythe {
@@ -373,5 +373,34 @@ document.addEventListener('DOMContentLoaded', () => {
         DeathScytheBot.push(new DeathScythe());
     }
 
-    update();
+    const death1 = new DeathScythe
+    const dragon1 = new Dragon
+    const ifrit1 = new Ifrit
+    
+    function collision(){
+        if (player.x < death1.x + death1.width &&
+            player.x + player.width > death1.x && 
+            player.y + death1.y + death1.height && 
+            player.y + player.height > death1.y && 
+            player.x < dragon1.x + dragon1.width &&
+            player.x + player.width > dragon1.x && 
+            player.y + dragon1.y + dragon1.height && 
+            player.y + player.height > dragon1.y && 
+            player.x < ifrit1.x + ifrit1.width &&
+            player.x + player.width > ifrit1.x  &&
+            player.y + ifrit1.y + ifrit1.height  &&
+            player.y + player.height > ifrit1.y){
+            console.log('YES IT HIT')
+        } else {
+ 
+        }
+    }
+
+    function drawScore(){
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#0095DD";
+        ctx.fillText("Score: "+score, 8, 20);
+    }
+
+    animatePlayer(); 
 })

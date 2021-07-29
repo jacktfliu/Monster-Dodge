@@ -1,24 +1,30 @@
 /*!*************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/stylesheets/index.scss ***!
   \*************************************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap);
+/*!*****************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/stylesheets/index.scss (1) ***!
+  \*****************************************************************************************************************************************************/
 #canvas {
   border-radius: 5px;
   height: 90%;
   width: 90%;
   margin-bottom: 50px;
-  background: white;
   background-image: url("../src/assets/background.gif");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .top-nav {
-  background-color: black;
+  background-image: url("../src/assets/b2.png");
+  background-color: #99CC99;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .box {
@@ -27,11 +33,10 @@
 }
 
 h1 {
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #586b36;
+  font-family: "Press Start 2P", cursive;
   align-items: center;
   font-size: 40px;
-  border: 1px solid blue;
   text-align: center;
 }
 
