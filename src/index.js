@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const keys = [];
     const ifritMovements = ['up','right', 'left', 'down'];
-    const numOfIfrit = 7;
+    const numOfIfrit = 5;
     const ifritBot = [];
 
     const dragonMovement = ['up','right', 'left', 'down'];
@@ -16,10 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const dragonBot = [];
 
     const deathScytheMovement = ['up','right', 'left', 'down'];
-    const numOfDeathScythe = 5;
+    const numOfDeathScythe = 8;
     const DeathScytheBot = [];
 
-    const score = 0;
+    let score = 0;
+    let gameOver = false;
 
     const player = {
         x: 200,
@@ -50,29 +51,35 @@ document.addEventListener('DOMContentLoaded', () => {
         for (i = 0; i < DeathScytheBot.length; i++ ){
             DeathScytheBot[i].drawDeath();
             DeathScytheBot[i].updateDeathMovement();
-            // collision();
         }
 
         for (i = 0; i < ifritBot.length; i++ ){
             ifritBot[i].drawIfrit();
             ifritBot[i].updateIfritMovement();
-            // collision();
         }
 
         for (i = 0; i < dragonBot.length; i++ ){
             dragonBot[i].drawDragon();
             dragonBot[i].updateDragonMovement();
-            // collision();
         }
 
-        drawScore();
-        collision();
+        drawScore()
+        handleGameStatus()
         moveChar();
         handlePlayerF();
-        requestAnimationFrame(animatePlayer);
+        if (!gameOver){
+            requestAnimationFrame(animatePlayer);
+        } 
     }
 
-    
+    animatePlayer();  
+
+    function drawScore(){
+        ctx.font = "18px Arial";
+        ctx.fillStyle = "#black";
+        ctx.fillText("Score: "+score, 20, 25);
+    }
+
     window.addEventListener('keydown', function(e){
         keys[e.keyCode] = true;
         player.moving = true;
@@ -109,11 +116,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //collision function
+    function collision(first, second){
+        if ( !(first.x > second.x + second.width ||
+                first.x  + first.width < second.x || 
+                first.y > second.y + second.height ||
+                first.y + first.height < second.y)
+        ){
+            return true
+        } else {
+            (score++ / 100);
+        }
+    }
+
+    // handlegame 
+    function handleGameStatus(){
+        if (gameOver){
+            ctx.fillStyle = 'black';
+            ctx.font = '90px Orbitron';
+            ctx.fillText('GAME OVER', 230, 300);
+            ctx.fillStyle = 'white';
+            ctx.font = '40px Orbitron';
+            ctx.fillText('Your Score is:'+ " " +score, 345, 400);            
+        }
+    }
+
     //ifrit movements
     class Ifrit {
         constructor(){
-            this.width = 80;
-            this.height = 80;
+            this.width = 40;
+            this.height = 56;
             this.fx = 0;
             this.x = Math.random() * canvas.width - this.width;
             this.y = Math.random() * canvas.height - this.height;
@@ -145,6 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
         drawIfrit(){
             drawPlayer(ifritTarget, this.width * this.fx, this.height * this.fy, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
             
+            if (collision(player, this)){
+                gameOver = true;
+            }
             if (this.fx < this.maxFrame){
                 this.fx++
             } else {
@@ -233,6 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
         drawDragon(){
             drawPlayer(dragonTarget, this.width * this.fx, this.height * this.fy, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
             
+            if (collision(player, this)){
+                gameOver = true;
+            }
             if (this.fx < this.maxFrame){
                 this.fx++
             } else {
@@ -322,6 +360,10 @@ document.addEventListener('DOMContentLoaded', () => {
         drawDeath(){
             drawPlayer(deathScytheTarget, this.width * this.fx, this.height * this.fy, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
             
+            if (collision(player, this)){
+                gameOver = true;
+            }
+
             if (this.fx < this.maxFrame){
                 this.fx++
             } else {
@@ -373,34 +415,4 @@ document.addEventListener('DOMContentLoaded', () => {
         DeathScytheBot.push(new DeathScythe());
     }
 
-    const death1 = new DeathScythe
-    const dragon1 = new Dragon
-    const ifrit1 = new Ifrit
-    
-    function collision(){
-        if (player.x < death1.x + death1.width &&
-            player.x + player.width > death1.x && 
-            player.y + death1.y + death1.height && 
-            player.y + player.height > death1.y && 
-            player.x < dragon1.x + dragon1.width &&
-            player.x + player.width > dragon1.x && 
-            player.y + dragon1.y + dragon1.height && 
-            player.y + player.height > dragon1.y && 
-            player.x < ifrit1.x + ifrit1.width &&
-            player.x + player.width > ifrit1.x  &&
-            player.y + ifrit1.y + ifrit1.height  &&
-            player.y + player.height > ifrit1.y){
-            console.log('YES IT HIT')
-        } else {
- 
-        }
-    }
-
-    function drawScore(){
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
-        ctx.fillText("Score: "+score, 8, 20);
-    }
-
-    animatePlayer(); 
 })
