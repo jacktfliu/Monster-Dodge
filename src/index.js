@@ -92,9 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
         DeathScytheBot.push(new DeathScythe());
         }        
         
-        setTimeout(() => {
-            animatePlayer();
-        }, 1000); 
+
+        animatePlayer();
+
     })
 
 
