@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "NODE_ENV=development webpack --watch --config webpack.config.js "
+    "webpack": "NODE_ENV=development webpack --watch --config webpack.config.js ",
+    "build": "webpack --mode=production"
   },
   "keywords": [],
   "author": "Jack Liu",
