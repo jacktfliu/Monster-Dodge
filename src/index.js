@@ -21,7 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let score = 0;
     let gameOver = false;
+    let gameStart = false;
 
+    const playerChar = document.getElementById('player')
+    const dragonTarget = document.getElementById('dragon')
+    const deathScytheTarget = document.getElementById('death-scythe')
+    const ifritTarget = document.getElementById('ifrit')   
+    
+    
     const player = {
         x: 200,
         y: 200,
@@ -33,10 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         moving: false
     }
 
-    const playerChar = document.getElementById('player')
-    const dragonTarget = document.getElementById('dragon')
-    const deathScytheTarget = document.getElementById('death-scythe')
-    const ifritTarget = document.getElementById('ifrit')    
+    function game(){
+
+    }
 
     function drawPlayer(img, sX, sY, sW, sH, dX, dY, dW, dH){
         ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
