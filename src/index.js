@@ -9,25 +9,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const keys = [];
     const ifritMovements = ['up','right', 'left', 'down'];
     const numOfIfrit = 5;
-    const ifritBot = [];
+    let  ifritBot = [];
 
     const dragonMovement = ['up','right', 'left', 'down'];
     const numOfDragon = 3;
-    const dragonBot = [];
+    let dragonBot = [];
 
     const deathScytheMovement = ['up','right', 'left', 'down'];
     const numOfDeathScythe = 8;
-    const DeathScytheBot = [];
+    let DeathScytheBot = [];
 
     let score = 0;
     let gameOver = false;
-    let gameStart = false;
 
     const playerChar = document.getElementById('player')
     const dragonTarget = document.getElementById('dragon')
     const deathScytheTarget = document.getElementById('death-scythe')
-    const ifritTarget = document.getElementById('ifrit')   
-    
+    const ifritTarget = document.getElementById('ifrit') 
+    const monster = document.getElementById('monster')  
     
     const player = {
         x: 200,
@@ -40,14 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         moving: false
     }
 
-    function game(){
-
-    }
-
     function drawPlayer(img, sX, sY, sW, sH, dX, dY, dW, dH){
         ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
     }
-
+    
     function animatePlayer(){
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         //player sprite
@@ -78,7 +73,32 @@ document.addEventListener('DOMContentLoaded', () => {
         } 
     }
 
-    animatePlayer();  
+    monster.addEventListener('click', () => {
+        gameOver = false;
+        ifritBot = []; 
+        dragonBot = [];
+        DeathScytheBot = []
+        score = 0;
+
+        for (i = 0; i < numOfIfrit; i++){
+        ifritBot.push(new Ifrit());
+        }
+        
+        for (i = 0; i < numOfDragon; i++){
+        dragonBot.push(new Dragon());
+        }
+
+        for (i = 0; i < numOfDeathScythe; i++){
+        DeathScytheBot.push(new DeathScythe());
+        }        
+        
+        setTimeout(() => {
+            animatePlayer();
+        }, 1000); 
+    })
+
+
+    
 
     function drawScore(){
         ctx.font = "18px Arial";
@@ -233,10 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    for (i = 0; i < numOfIfrit; i++){
-        ifritBot.push(new Ifrit());
-    }
-
     // dragon 
 
     class Dragon {
@@ -323,11 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    for (i = 0; i < numOfDragon; i++){
-        dragonBot.push(new Dragon());
-    }
-
 
     // DeathScythe
 
@@ -417,8 +428,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    for (i = 0; i < numOfDeathScythe; i++){
-        DeathScytheBot.push(new DeathScythe());
+    for (i = 0; i < numOfIfrit; i++){
+    ifritBot.push(new Ifrit());
     }
+    
+    for (i = 0; i < numOfDragon; i++){
+    dragonBot.push(new Dragon());
+    }
+
+    for (i = 0; i < numOfDeathScythe; i++){
+    DeathScytheBot.push(new DeathScythe());
+    }   
 
 })
