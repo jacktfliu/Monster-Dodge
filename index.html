@@ -7,22 +7,34 @@
         
         <link rel="stylesheet" href="./dist/main.css" />
         <script src="./dist/main.js"></script>
+        <script src="https://kit.fontawesome.com/23a6930115.js" crossorigin="anonymous"></script>
         <title>Monster Dodge</title>
     </head>
         <body>
             <nav class='top-nav'>
+                <div class='links'>
+                    <a href='https://github.com/jacktfliu/Monster-Dodge'><i class="fab fa-github"></i></a>
+                    <a href='https://www.linkedin.com/in/jack-l-338a09141/'><i class="fab fa-linkedin"></i></a>
+                    <a><i class="fab fa-angellist"></i></a>
+                </div>
                 <div class='box'>
-                    <!-- <div class='header'>
-                        <a>GITHUB</a>
-                        <a>LINKEDIN</a>
-                        <a>PERSONAL PROF</a>
-                    </div> -->
                     <h1 id='monster'>
                         Monster Dodge
                     </h1>
-                    <!-- <h2>Instructions</h2> -->
                 </div>
-                <canvas id="canvas" width="1000" height="600" ></canvas>
+                
+                
+            </div>
+            <h2 class='instructions'>Instructions</h2>
+            <canvas id="canvas" width="1000" height="600" ></canvas>
+            <div class='instructions' >How To Play</div>
+                <p>The Goal of Monster Dodge is in the title</p>
+                <p>Try to dodge monsters by  moving around using your arrow keys.</p>
+                <p>The more time you spend alive, the more points you accumulate</p>
+                <p>Monsters and their speed are randomized so you might die when the game starts.</p>
+                <p>Be vigilant and do your best! Good Luck.</p>
+                <p>To restart the game, reclick Monster Dodge</p>
+            <div>
                 <img src='./src/assets/golbez.png' alt='' id='player'/>
                 <img src='./src/assets/dragon.png' alt='' id='dragon'/>
                 <img src='./src/assets/death_scythe.png' alt='' id='death-scythe' />

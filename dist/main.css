@@ -84,33 +84,64 @@ font {
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-
-.box {
+.top-nav .links {
+  justify-content: space-between;
   display: flex;
   flex-direction: row;
 }
-
-h1 {
+.top-nav .links .fab {
+  font-size: 20px;
+  cursor: pointer;
+}
+.top-nav .links a:active {
+  color: black;
+}
+.top-nav .links a:focus {
+  color: black;
+}
+.top-nav .links a:hover {
+  color: black;
+}
+.top-nav .links a {
+  color: black;
+  margin-right: 15px;
+}
+.top-nav .links a:visited {
+  color: black;
+}
+.top-nav .instructions {
+  z-index: 10;
+}
+.top-nav .box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.top-nav h1 {
   color: #586b36;
   font-family: "Press Start 2P", cursive;
   align-items: center;
   font-size: 40px;
   text-align: center;
 }
-
-h2 {
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+.top-nav h2 {
+  color: black;
+  font-family: "Press Start 2P", cursive;
   align-items: center;
-  font-size: 24;
-  border: 1px solid blue;
+  font-size: 18px;
   text-align: center;
+  cursor: pointer;
+  margin-left: 10px;
 }
-
-.header {
-  border: 1px solid red;
-  color: white;
-  text-align: center;
+.top-nav h2:visited {
+  color: black;
+}
+.top-nav h2:hover {
+  color: black;
+}
+.top-nav h2:active {
+  color: black;
 }
 
 * {

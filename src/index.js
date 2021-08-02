@@ -27,10 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const deathScytheTarget = document.getElementById('death-scythe')
     const ifritTarget = document.getElementById('ifrit') 
     const monster = document.getElementById('monster')  
+    const instructions = document.getElementById('instructions')
     
     const player = {
-        x: 200,
-        y: 200,
+        x: 300,
+        y: 300,
         width: 32,
         height: 48,
         fx: 0,
@@ -38,6 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         speed: 5,
         moving: false
     }
+
+    // instructions.addEventListener('click', () => {
+        
+    // })
 
     function drawPlayer(img, sX, sY, sW, sH, dX, dY, dW, dH){
         ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
@@ -91,14 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
         for (i = 0; i < numOfDeathScythe; i++){
         DeathScytheBot.push(new DeathScythe());
         }        
-        
 
         animatePlayer();
 
     })
-
-
-    
 
     function drawScore(){
         ctx.font = "18px Arial";
@@ -163,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fillText('GAME OVER', 230, 300);
             ctx.fillStyle = 'white';
             ctx.font = '40px Orbitron';
-            ctx.fillText('Your Score is:'+ " " +score, 345, 400);            
+            ctx.fillText('Your Score is:'+ " " +score, 345, 400);         
         }
     }
 

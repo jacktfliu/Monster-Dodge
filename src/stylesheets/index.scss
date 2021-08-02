@@ -21,35 +21,79 @@
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+
+  .links{
+    justify-content: space-between;
+    display:flex;
+    flex-direction: row;
+
+    .fab{
+      font-size: 20px;
+      cursor: pointer;
+    }
+  
+    a:active{
+      color: black;
+    }
+  
+    a:focus{
+      color: black;
+    }
+  
+    a:hover{
+      color: black;
+    }
+  
+    a{
+      color: black;
+      margin-right: 15px;
+      &:visited{
+        color:black;
+      }
+    }
+}
+
+.instructions{
+  z-index: 10;
 }
 
 .box{
   display: flex;
   flex-direction: row;
-}
-
-h1{
-  color: #586b36;
-  font-family: 'Press Start 2P', cursive;
+  justify-content: space-evenly;
   align-items: center;
-  font-size: 40px;
-  text-align: center;
-}
 
-h2{
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  align-items: center;
-  font-size: 24;
-  border: 1px solid blue;
-  text-align: center;
-}
+  }
 
+  h1{
+    color: #586b36;
+    font-family: 'Press Start 2P', cursive;
+    align-items: center;
+    font-size: 40px;
+    text-align: center;
+  }
 
-.header{
-  border: 1px solid red;
-  color: white;
-  text-align: center;
+  h2{
+    color: black;
+    font-family: 'Press Start 2P', cursive;
+    align-items: center;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 10px;
+
+    &:visited{
+      color: black;
+    }
+
+    &:hover{
+      color: black;
+    }
+
+    &:active{
+      color:black;
+    }
+  }
 }
 
 * {
@@ -71,6 +115,7 @@ h2{
 #ifrit{
   display: none;
 }
+
 
 
 
