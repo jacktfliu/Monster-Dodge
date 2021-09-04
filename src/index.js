@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = 1000;
-    canvas.heigth = 600;
+    canvas.heigth = 500;
 
     const keys = [];
     const ifritMovements = ['up','right', 'left', 'down'];
@@ -170,10 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (gameOver){
             ctx.fillStyle = 'black';
             ctx.font = '90px Orbitron';
-            ctx.fillText('GAME OVER', 230, 300);
+            ctx.fillText('GAME OVER', 240, 250);
             ctx.fillStyle = 'white';
             ctx.font = '40px Orbitron';
-            ctx.fillText('Your Score is:'+ " " +score, 345, 400);         
+            ctx.fillText('Your Score is:'+ " " +score, 355, 300);         
         }
     }
 
