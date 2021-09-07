@@ -21,14 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let score = 0;
     let gameOver = false;
-    let close = false;
+    let game = false;
 
     const playerChar = document.getElementById('player')
     const dragonTarget = document.getElementById('dragon')
     const deathScytheTarget = document.getElementById('death-scythe')
     const ifritTarget = document.getElementById('ifrit') 
     const monster = document.getElementById('monster')  
-    const instruction = document.getElementsByClassName('instruction')[0]
     const instructions = document.getElementsByClassName('instructions')[0]
     
     const player = {
@@ -41,17 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         speed: 5,
         moving: false
     }
-
-    instruction.addEventListener('click', () => {
-        if (close){
-            close = false
-            instructions.style.display = 'none'
-        } else {
-            close = true
-            instructions.style.display = 'flex'            
-        }
-    })
-
 
     function drawPlayer(img, sX, sY, sW, sH, dX, dY, dW, dH){
         ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
@@ -78,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dragonBot[i].updateDragonMovement();
         }
 
+        instructionsHandler(game == false)
         drawScore()
         handleGameStatus()
         moveChar();
@@ -87,8 +76,23 @@ document.addEventListener('DOMContentLoaded', () => {
         } 
     }
 
-    monster.addEventListener('click', () => {
-        gameOver = false;
+    //game start
+    // monster.addEventListener('click', () => {
+    //     gameOver = false;
+    //     gameStarts();
+    // })
+
+    document.addEventListener('keydown', pressR);
+
+    function pressR(e){
+        if (e.code == 'KeyR'){
+            gameOver = false;
+            gameStarts();
+        }
+    }
+
+    //game 
+    function gameStarts(){
         ifritBot = []; 
         dragonBot = [];
         DeathScytheBot = []
@@ -107,12 +111,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }        
 
         animatePlayer();
+    }
 
-    })
+    function instructionsHandler(game){
+        if (game){
+            game = false
+            instructions.style.display = 'none'
+        } else {
+            game = true
+            instructions.style.display = 'flex'            
+        }
+    }
+    
+    instructionsHandler();   
 
     function drawScore(){
         ctx.font = "18px Arial";
-        ctx.fillStyle = "#black";
+        ctx.fillStyle = "white";
         ctx.fillText("Score: "+score, 20, 25);
     }
 
@@ -168,12 +183,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // handlegame 
     function handleGameStatus(){
         if (gameOver){
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'white';
+            ctx.font = '40px Orbitron';
+            ctx.fillText('Press R to restart', 360, 150); 
+            ctx.fillStyle = 'yellow';
             ctx.font = '90px Orbitron';
             ctx.fillText('GAME OVER', 240, 250);
             ctx.fillStyle = 'white';
             ctx.font = '40px Orbitron';
-            ctx.fillText('Your Score is:'+ " " +score, 355, 300);         
+            ctx.fillText('Your Score is:'+ " " +score, 350, 310);         
         }
     }
 

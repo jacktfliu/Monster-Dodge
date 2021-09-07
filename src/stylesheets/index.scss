@@ -23,32 +23,33 @@
   background-size: 100% 100%;
 
   .links{
+    margin-top: -35px;
     justify-content: space-between;
     display:flex;
     flex-direction: row;
 
     .fab{
-      font-size: 20px;
+      font-size: 30px;
       cursor: pointer;
     }
   
     a:active{
-      color: black;
+      color: yellow;
     }
   
     a:focus{
-      color: black;
+      color: yellow;
     }
   
     a:hover{
-      color: black;
+      color: yellow;
     }
   
     a{
-      color: black;
+      color: yellow;
       margin-right: 15px;
       &:visited{
-        color:black;
+        color:yellow;
       }
     }
 }
@@ -75,7 +76,17 @@
     font-size: 12px;
     color: white;
     text-align: center;
+  }
 
+  h1{
+    margin-top: 20px;
+    font-size: 20px;
+    color: yellow;
+  }
+
+  h3{
+    font-size: 20px;
+    color: yellow;
   }
 }
 
@@ -88,7 +99,7 @@
   }
 
   h1{
-    color: #586b36;
+    color: yellow;
     font-family: 'Press Start 2P', cursive;
     align-items: center;
     font-size: 40px;
