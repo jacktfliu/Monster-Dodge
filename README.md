@@ -29,7 +29,7 @@ Users are able to:
 
 ![walking](https://user-images.githubusercontent.com/82416350/132507766-55a21725-0ea5-4352-b195-a6a7af2b03a7.gif)
 
-
+The arrow keys on the keyboard allow players to move the character left, right, up and down. Each individual picture is handled by the handlePlayer() function. Based on the movement of the character, the correct animation will be displayed. 
 ```javascript
 function moveChar(){
     if (keys[38] && player.y > 0){
@@ -63,6 +63,7 @@ function handlePlayerF(){
 
 ![walking around](https://user-images.githubusercontent.com/82416350/132508439-1a9b7ac0-0930-409a-ac1d-ca57086c8d2f.gif)
 
+Pixel bots have randomized speed and movement based on this block of code. Whenever a bot enters the canvas, its speed and position are randomized. We do this to make each game play unique. 
 ```javascript
 updateDeathMovement(){
     if (this.action === 'up') {
@@ -105,10 +106,10 @@ updateDeathMovement(){
 ```
 
 ## 3. Collision(1 day) 
-* Collision between player and pixel character
+* Collision between player and pixel bot
 ![collison](https://user-images.githubusercontent.com/82416350/132508759-8b9b794d-b38e-4c58-a6b6-6e01765b97b2.gif)
 
-
+The overall design of the game relies heavily on collision detection. In our collision function, the first step is to determine which points of object a and object b are touching. If they are touching, we will return true. If they are not touching, we will increment the score. The drawDeath() function uses the collision function to detect if the player ever touches a pixel bot. If they are touching and we return true, the game is over.  
 ```javascript
   function collision(first, second){
       if ( !(first.x > second.x + second.width ||
@@ -143,8 +144,9 @@ drawDeath(){
 
 ## 5. Animation (1 day)
 * Pixel animation on player
-* Pixel animation on pixel characters
+* Pixel animation on pixel bot
 
+We demonstrate below the incrementation of different picture frames in order to create an animation-like display. We have a function for handling player frames as well as pixel bot frames. 
 ```javascript
   function handlePlayerF(){
       if (player.fx < 3 && player.moving){
@@ -153,7 +155,7 @@ drawDeath(){
           player.fx = 0
       }
   }
-  //pixel characters movement
+  //pixel bot movement & frame
   if (this.action === 'up') {
       this.fy = 3; 
       this.minFrame = 0;
