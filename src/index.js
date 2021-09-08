@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playerChar = document.getElementById('player')
     const dragonTarget = document.getElementById('dragon')
     const deathScytheTarget = document.getElementById('death-scythe')
-    const ifritTarget = document.getElementById('ifrit') 
+    const ifritTarget = document.getElementById('ifrit')
     const monster = document.getElementById('monster')  
     const instructions = document.getElementsByClassName('instructions')[0]
     
@@ -75,12 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(animatePlayer);
         } 
     }
-
-    //game start
-    // monster.addEventListener('click', () => {
-    //     gameOver = false;
-    //     gameStarts();
-    // })
 
     document.addEventListener('keydown', pressR);
 
@@ -225,7 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.minFrame = 0;
                 this.maxFrame = 3
             }
-
         }
 
         drawIfrit(){
