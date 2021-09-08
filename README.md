@@ -4,7 +4,7 @@ Welcome to the Monster Dodge wiki!
 
 Monster Dodge is a pixel game that lets you move about to avoid moving objects. Players move about as long as possible to earn points, but if they touch an enemy or an enemy touches them, they lose the game. This is a single player game. 
 
-Here's the live site!
+Here's the [live site!](https://jacktfliu.github.io/Monster-Dodge/)
 
 ![Screen Shot 2021-09-08 at 7 52 43 AM](https://user-images.githubusercontent.com/82416350/132507563-ea79a33d-8886-4fc2-bc34-6276f234d6db.png)
 
