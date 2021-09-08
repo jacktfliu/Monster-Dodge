@@ -6,7 +6,7 @@ Monster Dodge is a pixel game that lets you move about to avoid moving objects. 
 
 Here's the live site!
 
-![image](https://cdn.discordapp.com/attachments/652512641134362643/870097044847603752/Screen_Shot_2021-07-28_at_8.11.46_PM.png)
+![Screen Shot 2021-09-08 at 7 52 43 AM](https://user-images.githubusercontent.com/82416350/132507563-ea79a33d-8886-4fc2-bc34-6276f234d6db.png)
 
 ## Technologies
 * Vanilla Javascript 
@@ -20,6 +20,16 @@ Users are able to:
 * Move around within the bounds of canvas width and height
 * Move left or right 
 * Move up and down
+
+## MVP & Timeline
+
+## 1. User input dictates character movement (1 day)
+* Users can move left and right using keys on the keyboard 
+* Users can move up and down using keys on the keyboard
+
+![walking](https://user-images.githubusercontent.com/82416350/132507766-55a21725-0ea5-4352-b195-a6a7af2b03a7.gif)
+
+
 ```javascript
 function moveChar(){
     if (keys[38] && player.y > 0){
@@ -46,16 +56,12 @@ function handlePlayerF(){
 }
 ```
 
-## MVP & Timeline
-
-## 1. User input dictates character movement (1 day)
-* Users can move left and right using keys on the keyboard 
-* Users can move up and down using keys on the keyboard
-
 ## 2. Pixel Bot (2 days)
 * Different sized pixel bots move around randomly
 * Number of pixel bots differ depending on size
 * Speed of pixel bots are randomized
+
+![walking around](https://user-images.githubusercontent.com/82416350/132508439-1a9b7ac0-0930-409a-ac1d-ca57086c8d2f.gif)
 
 ```javascript
 updateDeathMovement(){
@@ -100,6 +106,8 @@ updateDeathMovement(){
 
 ## 3. Collision(1 day) 
 * Collision between player and pixel character
+![collison](https://user-images.githubusercontent.com/82416350/132508759-8b9b794d-b38e-4c58-a6b6-6e01765b97b2.gif)
+
 
 ```javascript
   function collision(first, second){
